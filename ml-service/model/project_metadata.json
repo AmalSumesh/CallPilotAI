@@ -1,0 +1,24 @@
+{
+  "project_title": "Customer Care Voice Intelligence & Escalation Assistant",
+  "dataset": "CREMA-D via Hugging Face",
+  "task": "Six-class speech emotion recognition",
+  "classes": [
+    "anger",
+    "disgust",
+    "fear",
+    "happy",
+    "neutral",
+    "sad"
+  ],
+  "encoder": "microsoft/wavlm-base (frozen feature extractor)",
+  "classifier": "Trainable attention-pooling neural network",
+  "split_method": "Speaker-disjoint train/validation/test split",
+  "train_samples": 4672,
+  "validation_samples": 1218,
+  "test_samples": 1552,
+  "limitations": [
+    "CREMA-D contains acted emotional speech, not real customer-care calls.",
+    "Results do not establish real-world call-centre performance.",
+    "Emotion classes are not direct measurements of customer frustration or escalation."
+  ]
+}
