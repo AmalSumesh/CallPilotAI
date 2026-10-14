@@ -16,6 +16,7 @@ export interface IConversation{
     source : "upload" | "live";
     status : "processing" | "completed" | "failed";
     duration : number;
+    audioUrl?: string;
     transcript : string;
     emotionTrend : IEmotionPoint[];
     escalationDetected : boolean;
@@ -59,6 +60,10 @@ const conversationSchema = new mongoose.Schema<IConversation>({
         type : Number,
         default : 0,
         min : 0
+    },
+    audioUrl : {
+        type : String,
+        default : ""
     },
     transcript : {
         type : String,
