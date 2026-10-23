@@ -1,28 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <defs>
-    <linearGradient id="callpilot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2563EB" />
-      <stop offset="100%" stop-color="#1D4ED8" />
-    </linearGradient>
-    <linearGradient id="callpilot-stroke" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#93C5FD" stop-opacity="0.6" />
-      <stop offset="100%" stop-color="#1E40AF" stop-opacity="0.2" />
-    </linearGradient>
-  </defs>
-
-  <!-- Background squircle -->
-  <rect width="32" height="32" rx="7.5" fill="url(#callpilot-grad)" />
-  <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="6.75" stroke="url(#callpilot-stroke)" stroke-width="1.5" fill="none" />
-
-  <!-- Lucide-aligned Headset in CallPilot White -->
+  <!-- Solid Blue rounded squircle matching Login page bg-blue-600 -->
+  <rect width="32" height="32" rx="8" fill="#2563EB" />
+  
+  <!-- Centered Lucide Headphones in White -->
   <g transform="translate(4, 4)" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none">
     <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" />
-  </g>
-
-  <!-- AI Voice / Emotion Pulse Wave in Bright Cyan -->
-  <g stroke="#38BDF8" stroke-linecap="round">
-    <line x1="13.5" y1="15" x2="13.5" y2="19" stroke-width="1.8" />
-    <line x1="16" y1="13" x2="16" y2="21" stroke-width="2.2" stroke="#67E8F9" />
-    <line x1="18.5" y1="15" x2="18.5" y2="19" stroke-width="1.8" />
   </g>
 </svg>
