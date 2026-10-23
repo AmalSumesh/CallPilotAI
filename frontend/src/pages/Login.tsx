@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Headphones, Eye, EyeOff, ArrowRight, Lock, Mail } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation, useSearchParams, Link } from 'react-router-dom';
+import { Headphones, Eye, EyeOff, ArrowRight, Lock, Mail, ShieldCheck, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { ThemeToggle } from '../components/common/ThemeToggle';
 
@@ -8,12 +8,34 @@ export const Login: React.FC = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const isAdminPrefill = searchParams.get('role') === 'admin' || (location.state as { adminPrefill?: boolean })?.adminPrefill;
+
+  const [email, setEmail] = useState(isAdminPrefill ? 'admin@example.com' : '');
+  const [password, setPassword] = useState(isAdminPrefill ? 'admin1234567' : '');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isAdminPrefill) {
+      setEmail('admin@example.com');
+      setPassword('admin1234567');
+    }
+  }, [isAdminPrefill]);
+
+  const fillAdminCredentials = () => {
+    setEmail('admin@example.com');
+    setPassword('admin1234567');
+    setError(null);
+  };
+
+  const clearCredentials = () => {
+    setEmail('');
+    setPassword('');
+    setError(null);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,6 +67,17 @@ export const Login: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative transition-colors duration-200">
+      {/* Top Navigation */}
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition px-3 py-1.5 rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800/50"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Home
+        </Link>
+      </div>
+
       {/* Top right theme toggle */}
       <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
         <ThemeToggle />
@@ -66,6 +99,23 @@ export const Login: React.FC = () => {
       {/* Main Login Card */}
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white dark:bg-slate-900 py-8 px-6 sm:px-10 shadow-xl shadow-slate-200/50 dark:shadow-slate-950/50 rounded-2xl border border-slate-200/80 dark:border-slate-800">
+          {/* Admin prefill notification */}
+          {isAdminPrefill && (
+            <div className="mb-5 p-3 rounded-xl bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800/60 flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2 text-cyan-800 dark:text-cyan-300 font-semibold">
+                <ShieldCheck className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+                <span>Admin Credentials Autofilled</span>
+              </div>
+              <button
+                type="button"
+                onClick={clearCredentials}
+                className="text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 underline cursor-pointer"
+              >
+                Clear
+              </button>
+            </div>
+          )}
+
           {error && (
             <div className="mb-6 p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-xs text-rose-700 dark:text-rose-300 font-medium leading-relaxed">
               {error}
@@ -136,6 +186,17 @@ export const Login: React.FC = () => {
             </button>
           </form>
 
+          {/* Quick autofill switch */}
+          <div className="mt-6 pt-5 border-t border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+            <span>Need admin access?</span>
+            <button
+              type="button"
+              onClick={fillAdminCredentials}
+              className="font-semibold text-blue-600 dark:text-cyan-400 hover:underline cursor-pointer"
+            >
+              Autofill Admin Login
+            </button>
+          </div>
         </div>
       </div>
     </div>

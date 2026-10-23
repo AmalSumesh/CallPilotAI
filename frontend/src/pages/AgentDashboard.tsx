@@ -51,6 +51,9 @@ export const AgentDashboard: React.FC = () => {
 
   const escalationCount = calls.filter((c) => c.escalationDetected).length;
   const completedCount = calls.filter((c) => c.status === 'completed').length;
+  const resolutionRate = totalCalls > 0
+    ? `${Math.round(((totalCalls - escalationCount) / totalCalls) * 100)}%`
+    : '100%';
 
   // Emotion distribution for agent's own calls
   const emotionDistribution = useMemo(() => {
@@ -159,11 +162,11 @@ export const AgentDashboard: React.FC = () => {
         />
 
         <MetricCard
-          title="Acoustic Accuracy"
-          value="WavLM Base"
-          subtitle="CPU Neural Inference active"
+          title="Resolution Rate"
+          value={resolutionRate}
+          subtitle="Calls handled without escalation"
           icon={CheckCircle2}
-          variant="amber"
+          variant="emerald"
         />
       </div>
 

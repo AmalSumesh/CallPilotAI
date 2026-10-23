@@ -5,6 +5,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { AppLayout } from '../components/layout/AppLayout';
 
 import { Login } from '../pages/Login';
+import { Landing } from '../pages/Landing';
 import { AdminDashboard } from '../pages/AdminDashboard';
 import { AgentManagement } from '../pages/AgentManagement';
 import { CallHistory } from '../pages/CallHistory';
@@ -17,11 +18,6 @@ import { Profile } from '../pages/Profile';
 
 export const AppRoutes: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
-
-  const getRootRedirect = () => {
-    if (!isAuthenticated || !user) return '/login';
-    return user.role === 'admin' ? '/admin/dashboard' : '/agent/dashboard';
-  };
 
   return (
     <Routes>
@@ -72,9 +68,11 @@ export const AppRoutes: React.FC = () => {
         <Route path="profile" element={<Profile />} />
       </Route>
 
+      {/* Landing Page as Root */}
+      <Route path="/" element={<Landing />} />
+
       {/* Default Catch-all */}
-      <Route path="/" element={<Navigate to={getRootRedirect()} replace />} />
-      <Route path="*" element={<Navigate to={getRootRedirect()} replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
