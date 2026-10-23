@@ -7,7 +7,6 @@ import {
   BarChart3,
   CheckCircle2,
   Calendar,
-  Headphones,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { callApi } from '../api/callApi';

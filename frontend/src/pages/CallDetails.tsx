@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -9,10 +9,7 @@ import {
   Radio,
   Activity,
   FileText,
-  Play,
-  Pause,
   Headphones,
-  RotateCcw,
   VolumeX,
   Trash2,
 } from 'lucide-react';
@@ -41,12 +38,7 @@ export const CallDetails: React.FC = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   // Audio Playback State
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [audioDuration, setAudioDuration] = useState(0);
   const [playableUrl, setPlayableUrl] = useState<string>('');
-  const [audioPlaybackError, setAudioPlaybackError] = useState<string | null>(null);
 
   // Convert base64 Data URL to Blob URL for 100% reliable browser playback and seeking
   useEffect(() => {
@@ -68,7 +60,6 @@ export const CallDetails: React.FC = () => {
         const blob = new Blob([u8arr], { type: mime });
         const objUrl = URL.createObjectURL(blob);
         setPlayableUrl(objUrl);
-        setAudioPlaybackError(null);
 
         return () => {
           URL.revokeObjectURL(objUrl);
@@ -82,23 +73,8 @@ export const CallDetails: React.FC = () => {
     }
   }, [call?.audioUrl]);
 
-  const togglePlay = async () => {
-    if (!audioRef.current) return;
-    setAudioPlaybackError(null);
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      try {
-        await audioRef.current.play();
-      } catch (err) {
-        console.error('Audio play error:', err);
-        setAudioPlaybackError('Playback failed. Please try again or use the native player below.');
-      }
-    }
-  };
-
   const formatTime = (seconds: number) => {
-    if (isNaN(seconds) || seconds < 0) return '0:00';
+    if (!seconds || isNaN(seconds) || !isFinite(seconds) || seconds < 0) return '0:00';
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
@@ -318,93 +294,20 @@ export const CallDetails: React.FC = () => {
           {call.audioUrl && (
             <div className="flex items-center gap-2">
               <span className="font-mono text-xs font-semibold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md">
-                {formatTime(currentTime)} / {formatTime(audioDuration || call.duration)}
+                Duration: {formatTime(call.duration)}
               </span>
             </div>
           )}
         </div>
 
         {call.audioUrl ? (
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-3">
-            {audioPlaybackError && (
-              <div className="p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-center gap-2">
-                <AlertTriangle className="w-4 h-4 text-rose-500 shrink-0" />
-                <span>{audioPlaybackError}</span>
-              </div>
-            )}
-
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
             <audio
-              ref={audioRef}
+              controls
               src={playableUrl}
-              onPlay={() => setIsPlaying(true)}
-              onPause={() => setIsPlaying(false)}
-              onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
-              onLoadedMetadata={(e) => setAudioDuration(e.currentTarget.duration)}
-              onEnded={() => setIsPlaying(false)}
-              onError={(e) => {
-                console.error('Audio load error:', e);
-                setAudioPlaybackError('Audio decoder encountered an issue. Try the native player below.');
-              }}
-              preload="auto"
-              className="hidden"
+              className="w-full h-10"
+              preload="metadata"
             />
-
-            {/* Custom Controls Bar */}
-            <div className="flex items-center gap-4">
-              <button
-                type="button"
-                onClick={togglePlay}
-                className="w-11 h-11 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-xs transition shrink-0 cursor-pointer"
-              >
-                {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
-              </button>
-
-              {/* Progress Slider */}
-              <div className="flex-1 space-y-1">
-                <input
-                  type="range"
-                  min="0"
-                  max={audioDuration || call.duration || 100}
-                  step="0.1"
-                  value={currentTime}
-                  onChange={(e) => {
-                    const t = parseFloat(e.target.value);
-                    setCurrentTime(t);
-                    if (audioRef.current) audioRef.current.currentTime = t;
-                  }}
-                  className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-                />
-                <div className="flex justify-between text-[11px] font-mono text-slate-400">
-                  <span>{formatTime(currentTime)}</span>
-                  <span>{formatTime(audioDuration || call.duration)}</span>
-                </div>
-              </div>
-
-              {/* Reset to Start */}
-              <button
-                type="button"
-                onClick={() => {
-                  if (audioRef.current) audioRef.current.currentTime = 0;
-                  setCurrentTime(0);
-                }}
-                className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-200/60 transition cursor-pointer"
-                title="Restart Audio"
-              >
-                <RotateCcw className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Native Browser Player */}
-            {playableUrl && (
-              <div className="pt-2 border-t border-slate-200/60">
-                <audio
-                  controls
-                  src={playableUrl}
-                  className="w-full h-8"
-                  preload="auto"
-                />
-              </div>
-            )}
           </div>
         ) : (
           <div className="p-4 rounded-xl bg-slate-50 border border-dashed border-slate-200 flex items-center gap-3 text-xs text-slate-500">

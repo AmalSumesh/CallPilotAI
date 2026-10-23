@@ -4,7 +4,6 @@ import {
   LayoutDashboard,
   Users,
   PhoneCall,
-  Activity,
   BarChart3,
   Mic,
   Headphones,

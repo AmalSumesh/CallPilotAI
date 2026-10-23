@@ -93,9 +93,6 @@ export const Profile: React.FC = () => {
           </div>
 
           <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <span className="text-xs text-slate-400">
-              Authenticated via Express JWT Bearer Token
-            </span>
             <button
               type="button"
               onClick={() => setShowLogoutModal(true)}

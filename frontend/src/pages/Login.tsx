@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Headphones, Eye, EyeOff, ShieldCheck, ArrowRight, Lock, Mail } from 'lucide-react';
+import { Headphones, Eye, EyeOff, ArrowRight, Lock, Mail } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export const Login: React.FC = () => {
@@ -40,11 +40,6 @@ export const Login: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleQuickFillAdmin = () => {
-    setEmail('admin@example.com');
-    setPassword('admin1234567');
   };
 
   return (
@@ -135,31 +130,6 @@ export const Login: React.FC = () => {
             </button>
           </form>
 
-          {/* Quick Demo Access Aid */}
-          <div className="mt-6 pt-5 border-t border-slate-100">
-            <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-semibold text-slate-700 flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-blue-600" />
-                  Default Admin Credentials
-                </span>
-                <button
-                  type="button"
-                  onClick={handleQuickFillAdmin}
-                  className="text-blue-600 hover:text-blue-800 font-semibold underline underline-offset-2"
-                >
-                  Fill Admin
-                </button>
-              </div>
-              <p className="mt-1 text-[11px] text-slate-500 font-mono">
-                admin@example.com / admin1234567
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-6 text-center text-xs text-slate-400">
-            <span>Enterprise Role-Based Access Control • Agent accounts are managed by Admins</span>
-          </div>
         </div>
       </div>
     </div>
