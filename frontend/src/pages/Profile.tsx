@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, Shield, Calendar, LogOut, CheckCircle2, Moon, Sun, Monitor } from 'lucide-react';
+import { User, Mail, Shield, Calendar, LogOut, Moon, Sun, Monitor } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -48,10 +48,6 @@ export const Profile: React.FC = () => {
             </div>
             <div className="mb-2">
               <h2 className="text-xl font-bold text-slate-900 dark:text-white">{user?.name}</h2>
-              <span className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                Active Account
-              </span>
             </div>
           </div>
         </div>

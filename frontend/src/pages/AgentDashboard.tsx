@@ -110,7 +110,6 @@ export const AgentDashboard: React.FC = () => {
       <PageHeader
         title={`Welcome, ${user?.name || 'Agent'}`}
         subtitle="Your assigned calls, emotion trends, and speech acoustic telemetry"
-        badge="Agent Console"
         actions={
           <div className="flex items-center gap-2">
             <Link

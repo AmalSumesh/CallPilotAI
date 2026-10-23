@@ -34,10 +34,6 @@ export const TopNav: React.FC<TopNavProps> = ({ onToggleSidebar }) => {
           >
             <Menu className="w-5 h-5" />
           </button>
-
-          <div className="hidden sm:flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-            <span className="font-medium text-slate-700 dark:text-slate-200">CallPilot AI Engine</span>
-          </div>
         </div>
 
         {/* Right Actions */}
