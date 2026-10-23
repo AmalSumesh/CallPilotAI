@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, LogOut, Headphones } from 'lucide-react';
+import { Menu, LogOut, Headphones, Mic } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { ConfirmModal } from '../common/ConfirmModal';
@@ -41,15 +41,25 @@ export const TopNav: React.FC<TopNavProps> = ({ onToggleSidebar }) => {
           {/* Theme Toggle */}
           <ThemeToggle />
 
-          {/* Quick Analyze Button (Agents only) */}
+          {/* Quick Action Buttons (Agents only) */}
           {isAgent && (
-            <Link
-              to="/agent/analyze"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition shadow-2xs"
-            >
-              <Headphones className="w-3.5 h-3.5" />
-              Analyze Audio
-            </Link>
+            <div className="hidden sm:flex items-center gap-2">
+              <Link
+                to="/agent/live"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg transition shadow-2xs"
+              >
+                <Mic className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                Analyze Call
+              </Link>
+
+              <Link
+                to="/agent/analyze"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition shadow-2xs"
+              >
+                <Headphones className="w-3.5 h-3.5" />
+                Analyze Audio
+              </Link>
+            </div>
           )}
 
           {/* Logout Action */}

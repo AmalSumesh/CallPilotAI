@@ -62,7 +62,14 @@ export const LiveMonitoring: React.FC = () => {
     setError(null);
     setSaveSuccess(null);
     setSavedCall(null);
+    setLivePoints([]);
+    setCurrentEmotion(null);
+    setCurrentConfidence(0);
+    setFrustrationSignal(0);
+    setSessionDuration(0);
+    setCallTitle('');
     allSessionPointsRef.current = [];
+    audioChunksRef.current = [];
     sessionStartTimeRef.current = Date.now();
     setStatusMessage('Connecting to ML WebSocket...');
 
@@ -275,6 +282,17 @@ export const LiveMonitoring: React.FC = () => {
       setSaveSuccess(
         `Live call "${res.conversation.title}" and recorded audio saved to Call History.`
       );
+
+      // Clean up session buffers so it doesn't bleed into any subsequent recording
+      allSessionPointsRef.current = [];
+      audioChunksRef.current = [];
+      sessionStartTimeRef.current = null;
+      setLivePoints([]);
+      setCallTitle('');
+      setCurrentEmotion(null);
+      setCurrentConfidence(0);
+      setFrustrationSignal(0);
+      setSessionDuration(0);
     } catch (err) {
       setError((err as Error).message || 'Failed to save live session to database');
     } finally {
