@@ -1,0 +1,71 @@
+name: Deploy ML Service to Azure Container Apps
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ml-service/**'
+      - '.github/workflows/deploy-ml.yml'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions UI
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/callpilot-ml
+  CONTAINER_APP_NAME: callpilot-ml
+  RESOURCE_GROUP: callpilot-rg
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry (GHCR)
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Convert Repository Name to Lowercase
+        id: image-tag
+        run: |
+          IMAGE_LOWER=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
+          echo "image_url=$IMAGE_LOWER:latest" >> $GITHUB_OUTPUT
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./ml-service
+          file: ./ml-service/Dockerfile
+          push: true
+          tags: ${{ steps.image-tag.outputs.image_url }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Log in to Azure (if AZURE_CREDENTIALS secret is provided)
+        id: azure-login
+        continue-on-error: true
+        uses: azure/login@v2
+        if: "${{ env.AZURE_CREDENTIALS != '' }}"
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Update Azure Container App Image
+        if: steps.azure-login.outcome == 'success'
+        run: |
+          az containerapp update \
+            --name ${{ env.CONTAINER_APP_NAME }} \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --image ${{ steps.image-tag.outputs.image_url }}
