@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Headphones, Shield, Radio, Activity, ArrowRight, Zap } from 'lucide-react';
+import { Headphones, Radio, Activity, ArrowRight, Zap } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { ThemeToggle } from '../components/common/ThemeToggle';
 
@@ -8,11 +8,7 @@ export const Landing: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  const handleAdminLogin = () => {
-    navigate('/login?role=admin', { state: { adminPrefill: true } });
-  };
-
-  const handleRegularLogin = () => {
+  const handleLogin = () => {
     navigate('/login');
   };
 
@@ -41,7 +37,7 @@ export const Landing: React.FC = () => {
           </span>
         </Link>
 
-        {/* Action Buttons: Login & Login as Admin */}
+        {/* Action Button: Login */}
         <div className="flex items-center gap-3">
           <ThemeToggle />
 
@@ -54,38 +50,19 @@ export const Landing: React.FC = () => {
               <ArrowRight className="w-4 h-4" />
             </Link>
           ) : (
-            <>
-              {/* Regular Login */}
-              <button
-                type="button"
-                onClick={handleRegularLogin}
-                className="px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white border border-slate-700/80 hover:border-slate-500 bg-slate-900/60 hover:bg-slate-800/80 backdrop-blur-md transition duration-200 cursor-pointer"
-              >
-                Login
-              </button>
-
-              {/* Login as Admin */}
-              <button
-                type="button"
-                onClick={handleAdminLogin}
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-cyan-400 hover:bg-cyan-300 text-slate-950 shadow-lg shadow-cyan-500/30 hover:shadow-cyan-400/50 transition duration-200 cursor-pointer"
-              >
-                <Shield className="w-4 h-4 text-slate-950" />
-                Login as Admin
-              </button>
-            </>
+            <button
+              type="button"
+              onClick={handleLogin}
+              className="px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-200 hover:text-white border border-slate-700/80 hover:border-slate-500 bg-slate-900/60 hover:bg-slate-800/80 backdrop-blur-md transition duration-200 cursor-pointer"
+            >
+              Login
+            </button>
           )}
         </div>
       </header>
 
       {/* Hero Section */}
-      <main className="flex-1 flex flex-col items-center justify-center text-center px-6 py-12 sm:py-20 max-w-5xl mx-auto relative z-10">
-        {/* Top Innovation Pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 shadow-inner mb-8">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-          <span>WavLM Neural Transformer • Real-Time Voice Telemetry</span>
-        </div>
-
+      <main className="flex-1 flex flex-col items-center justify-center text-center px-6 py-16 sm:py-24 max-w-5xl mx-auto relative z-10">
         {/* Big Bold Headline */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
           Hear The <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">Emotion</span>
@@ -98,24 +75,15 @@ export const Landing: React.FC = () => {
           AI-powered speech emotion recognition that understands customer sentiment in real-time. Detect frustration early, protect call resolution rates, and empower contact center agents live.
         </p>
 
-        {/* Main Hero Call To Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-16">
+        {/* Hero Call To Action */}
+        <div className="flex justify-center w-full sm:w-auto mb-16">
           <button
             type="button"
-            onClick={handleAdminLogin}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-cyan-400 hover:bg-cyan-300 text-slate-950 shadow-xl shadow-cyan-500/30 hover:shadow-cyan-400/50 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
+            onClick={handleLogin}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-3.5 rounded-xl text-sm font-bold bg-cyan-400 hover:bg-cyan-300 text-slate-950 shadow-xl shadow-cyan-500/30 hover:shadow-cyan-400/50 transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
           >
-            <Shield className="w-4 h-4 text-slate-950" />
-            Login as Admin
-          </button>
-
-          <button
-            type="button"
-            onClick={handleRegularLogin}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold text-white border border-slate-700 hover:border-slate-500 bg-slate-900/80 hover:bg-slate-800 transition duration-200 cursor-pointer"
-          >
-            Login
-            <ArrowRight className="w-4 h-4 text-slate-400" />
+            Get Started
+            <ArrowRight className="w-4 h-4 text-slate-950" />
           </button>
         </div>
 
