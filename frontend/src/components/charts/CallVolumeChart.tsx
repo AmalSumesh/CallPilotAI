@@ -18,7 +18,7 @@ export const CallVolumeChart: React.FC<CallVolumeChartProps> = ({
 
   if (!data || data.length === 0) {
     return (
-      <div className="flex h-44 items-center justify-center rounded-lg border border-dashed border-slate-200 bg-slate-50 text-xs text-slate-400">
+      <div className="flex h-44 items-center justify-center rounded-lg border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 text-xs text-slate-400 dark:text-slate-500">
         No call volume history available
       </div>
     );
@@ -52,14 +52,14 @@ export const CallVolumeChart: React.FC<CallVolumeChartProps> = ({
                 y1={y}
                 x2={width - padding.right}
                 y2={y}
-                stroke="#e2e8f0"
+                className="stroke-slate-200 dark:stroke-slate-800"
                 strokeDasharray="3 3"
               />
               <text
                 x={padding.left - 6}
                 y={y + 4}
                 textAnchor="end"
-                className="text-[10px] fill-slate-400 font-mono"
+                className="text-[10px] fill-slate-400 dark:fill-slate-500 font-mono"
               >
                 {labelVal}
               </text>
@@ -83,14 +83,14 @@ export const CallVolumeChart: React.FC<CallVolumeChartProps> = ({
                 height={barHeight}
                 rx={4}
                 className={`transition-all duration-200 ${
-                  isHovered ? 'fill-blue-700' : 'fill-blue-500 hover:fill-blue-600'
+                  isHovered ? 'fill-blue-700 dark:fill-blue-500' : 'fill-blue-500 hover:fill-blue-600 dark:fill-blue-600 dark:hover:fill-blue-500'
                 }`}
               />
               <text
                 x={x + barWidth / 2}
                 y={padding.top + chartHeight + 16}
                 textAnchor="middle"
-                className="text-[9px] fill-slate-500 font-sans"
+                className="text-[9px] fill-slate-500 dark:fill-slate-400 font-sans"
               >
                 {item.date}
               </text>
@@ -101,9 +101,9 @@ export const CallVolumeChart: React.FC<CallVolumeChartProps> = ({
 
       {/* Hover Tooltip */}
       {hoveredIndex !== null && data[hoveredIndex] && (
-        <div className="absolute top-2 right-4 bg-slate-900 text-white text-xs px-2.5 py-1 rounded shadow-md font-mono">
-          <span className="text-slate-300 mr-2">{data[hoveredIndex].date}:</span>
-          <span className="font-bold text-blue-300">{data[hoveredIndex].count} calls</span>
+        <div className="absolute top-2 right-4 bg-slate-900 dark:bg-slate-800 text-white text-xs px-2.5 py-1 rounded shadow-md font-mono border border-transparent dark:border-slate-700">
+          <span className="text-slate-300 dark:text-slate-400 mr-2">{data[hoveredIndex].date}:</span>
+          <span className="font-bold text-blue-300 dark:text-blue-400">{data[hoveredIndex].count} calls</span>
         </div>
       )}
     </div>

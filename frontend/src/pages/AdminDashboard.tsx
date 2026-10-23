@@ -151,12 +151,12 @@ export const AdminDashboard: React.FC = () => {
         subtitle="Real-time contact center emotion analytics and performance telemetry"
         actions={
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">
-              <Calendar className="w-3.5 h-3.5 text-slate-400" />
+            <div className="flex items-center gap-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-200 shadow-2xs">
+              <Calendar className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
               <select
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value as 'all' | 'today' | '7d' | '30d')}
-                className="bg-transparent focus:outline-hidden cursor-pointer"
+                className="bg-transparent focus:outline-hidden cursor-pointer dark:bg-slate-800"
               >
                 <option value="all">All-Time Data</option>
                 <option value="today">Today</option>
@@ -217,13 +217,13 @@ export const AdminDashboard: React.FC = () => {
       {/* Analytics Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Call Volume Trend */}
-        <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200/90 p-5 shadow-2xs">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-5 shadow-2xs">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Call Volume History</h3>
-              <p className="text-xs text-slate-500">Inbound and uploaded calls over time</p>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">Call Volume History</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Inbound and uploaded calls over time</p>
             </div>
-            <div className="p-2 rounded-lg bg-blue-50 text-blue-600">
+            <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
               <BarChart3 className="w-4 h-4" />
             </div>
           </div>
@@ -231,13 +231,13 @@ export const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Aggregate Emotion Breakdown */}
-        <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-2xs">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-5 shadow-2xs">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Emotion Distribution</h3>
-              <p className="text-xs text-slate-500">Aggregate speech classification</p>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">Emotion Distribution</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Aggregate speech classification</p>
             </div>
-            <div className="p-2 rounded-lg bg-emerald-50 text-emerald-600">
+            <div className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
               <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>
@@ -249,12 +249,12 @@ export const AdminDashboard: React.FC = () => {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-base font-bold text-slate-900">Recent Calls & Recordings</h2>
-            <p className="text-xs text-slate-500">Persisted in MongoDB with emotion timeline data</p>
+            <h2 className="text-base font-bold text-slate-900 dark:text-white">Recent Calls & Recordings</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Persisted in MongoDB with emotion timeline data</p>
           </div>
           <Link
             to="/admin/calls"
-            className="text-xs font-semibold text-blue-600 hover:text-blue-800"
+            className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
           >
             View All Calls →
           </Link>

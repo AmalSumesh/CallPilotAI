@@ -46,7 +46,7 @@ export const EmotionTrendChart: React.FC<EmotionTrendChartProps> = ({
 
   if (chartPoints.length === 0) {
     return (
-      <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-slate-200 bg-slate-50 text-xs text-slate-400">
+      <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 text-xs text-slate-400 dark:text-slate-500">
         No emotion trend data available
       </div>
     );
@@ -103,7 +103,7 @@ export const EmotionTrendChart: React.FC<EmotionTrendChartProps> = ({
   return (
     <div className="flex flex-col gap-3">
       {/* Legend & Emotion Toggles */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-2.5">
         <div className="flex flex-wrap items-center gap-1.5">
           {(Object.keys(EMOTION_COLORS) as EmotionName[]).map((emotion) => {
             const isActive = activeEmotions[emotion];
@@ -114,8 +114,8 @@ export const EmotionTrendChart: React.FC<EmotionTrendChartProps> = ({
                 onClick={() => toggleEmotion(emotion)}
                 className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition ${
                   isActive
-                    ? 'bg-slate-100 text-slate-800 shadow-2xs'
-                    : 'bg-transparent text-slate-400 opacity-50 hover:opacity-80'
+                    ? 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 shadow-2xs'
+                    : 'bg-transparent text-slate-400 dark:text-slate-500 opacity-50 hover:opacity-80'
                 }`}
               >
                 <span
@@ -129,15 +129,15 @@ export const EmotionTrendChart: React.FC<EmotionTrendChartProps> = ({
         </div>
 
         {showFrustrationSignal && (
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200">
-            <span className="w-2.5 h-1 border-t-2 border-dashed border-rose-500 inline-block" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-900/60">
+            <span className="w-2.5 h-1 border-t-2 border-dashed border-rose-500 dark:border-rose-400 inline-block" />
             <span>Frustration Signal (Anger+Disgust)</span>
           </div>
         )}
       </div>
 
       {/* SVG Chart */}
-      <div className="relative w-full overflow-hidden rounded-lg bg-white">
+      <div className="relative w-full overflow-hidden rounded-lg bg-white dark:bg-slate-900/50">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           className="w-full h-auto select-none"
@@ -154,14 +154,14 @@ export const EmotionTrendChart: React.FC<EmotionTrendChartProps> = ({
                   y1={y}
                   x2={width - padding.right}
                   y2={y}
-                  stroke="#e2e8f0"
+                  className="stroke-slate-200 dark:stroke-slate-800"
                   strokeDasharray="3 3"
                 />
                 <text
                   x={padding.left - 8}
                   y={y + 4}
                   textAnchor="end"
-                  className="text-[10px] fill-slate-400 font-mono"
+                  className="text-[10px] fill-slate-400 dark:fill-slate-500 font-mono"
                 >
                   {Math.round(ratio * 100)}%
                 </text>
@@ -175,7 +175,7 @@ export const EmotionTrendChart: React.FC<EmotionTrendChartProps> = ({
             y1={padding.top + chartHeight}
             x2={width - padding.right}
             y2={padding.top + chartHeight}
-            stroke="#cbd5e1"
+            className="stroke-slate-300 dark:stroke-slate-700"
             strokeWidth="1.5"
           />
 
@@ -192,13 +192,13 @@ export const EmotionTrendChart: React.FC<EmotionTrendChartProps> = ({
                   y1={padding.top + chartHeight}
                   x2={x}
                   y2={padding.top + chartHeight + 4}
-                  stroke="#94a3b8"
+                  className="stroke-slate-400 dark:stroke-slate-600"
                 />
                 <text
                   x={x}
                   y={padding.top + chartHeight + 16}
                   textAnchor="middle"
-                  className="text-[10px] fill-slate-500 font-mono"
+                  className="text-[10px] fill-slate-500 dark:fill-slate-400 font-mono"
                 >
                   {Math.round(p.time)}s
                 </text>
@@ -241,7 +241,7 @@ export const EmotionTrendChart: React.FC<EmotionTrendChartProps> = ({
               y1={padding.top}
               x2={getX(hoveredPoint.time)}
               y2={padding.top + chartHeight}
-              stroke="#475569"
+              className="stroke-slate-600 dark:stroke-slate-400"
               strokeWidth="1.5"
               strokeDasharray="2 2"
             />
@@ -268,10 +268,10 @@ export const EmotionTrendChart: React.FC<EmotionTrendChartProps> = ({
 
         {/* Hover Tooltip Overlay */}
         {hoveredPoint && (
-          <div className="mt-2 p-3 bg-slate-900 text-white rounded-lg shadow-lg text-xs flex flex-wrap items-center justify-between gap-4">
+          <div className="mt-2 p-3 bg-slate-900 dark:bg-slate-800 text-white rounded-lg shadow-lg text-xs flex flex-wrap items-center justify-between gap-4 border border-transparent dark:border-slate-700">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-slate-300">Timestamp:</span>
-              <span className="font-mono bg-slate-800 px-2 py-0.5 rounded text-blue-300">
+              <span className="font-semibold text-slate-300 dark:text-slate-400">Timestamp:</span>
+              <span className="font-mono bg-slate-800 dark:bg-slate-900 px-2 py-0.5 rounded text-blue-300 dark:text-blue-400">
                 {hoveredPoint.time.toFixed(1)}s
               </span>
             </div>
@@ -283,14 +283,14 @@ export const EmotionTrendChart: React.FC<EmotionTrendChartProps> = ({
                     className="w-2 h-2 rounded-full inline-block"
                     style={{ backgroundColor: EMOTION_COLORS[em] }}
                   />
-                  <span className="capitalize text-slate-400">{em}:</span>
+                  <span className="capitalize text-slate-400 dark:text-slate-400">{em}:</span>
                   <span className="font-bold text-white">
                     {Math.round((hoveredPoint[em] || 0) * 100)}%
                   </span>
                 </div>
               ))}
               {showFrustrationSignal && (
-                <div className="flex items-center gap-1 pl-2 border-l border-slate-700 text-rose-300 font-bold">
+                <div className="flex items-center gap-1 pl-2 border-l border-slate-700 text-rose-300 dark:text-rose-400 font-bold">
                   <span>Frustration:</span>
                   <span>
                     {Math.round(

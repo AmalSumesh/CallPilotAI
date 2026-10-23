@@ -81,15 +81,15 @@ export const AgentManagement: React.FC = () => {
       />
 
       {notification && (
-        <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 font-medium flex items-center justify-between">
+        <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900/60 text-xs text-emerald-800 dark:text-emerald-300 font-medium flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-600" />
+            <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             {notification}
           </span>
           <button
             type="button"
             onClick={() => setNotification(null)}
-            className="text-emerald-700 hover:text-emerald-950 font-bold"
+            className="text-emerald-700 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-emerald-200 font-bold"
           >
             ×
           </button>
@@ -100,33 +100,33 @@ export const AgentManagement: React.FC = () => {
 
       {/* Directory Quick Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white rounded-xl border border-slate-200/90 p-4 flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-blue-50 text-blue-600">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-4 flex items-center gap-3">
+          <div className="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <p className="text-xs text-slate-500 font-medium">Total Agents</p>
-            <p className="text-xl font-bold text-slate-900">{agents.length}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Total Agents</p>
+            <p className="text-xl font-bold text-slate-900 dark:text-white">{agents.length}</p>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-slate-200/90 p-4 flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-emerald-50 text-emerald-600">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-4 flex items-center gap-3">
+          <div className="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
             <CheckCircle className="w-5 h-5" />
           </div>
           <div>
-            <p className="text-xs text-slate-500 font-medium">Active Accounts</p>
-            <p className="text-xl font-bold text-emerald-600">{activeCount}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Active Accounts</p>
+            <p className="text-xl font-bold text-emerald-600 dark:text-emerald-400">{activeCount}</p>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-slate-200/90 p-4 flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-slate-100 text-slate-600">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-4 flex items-center gap-3">
+          <div className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
             <ShieldAlert className="w-5 h-5" />
           </div>
           <div>
-            <p className="text-xs text-slate-500 font-medium">Deactivated Accounts</p>
-            <p className="text-xl font-bold text-slate-600">{inactiveCount}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Deactivated Accounts</p>
+            <p className="text-xl font-bold text-slate-600 dark:text-slate-400">{inactiveCount}</p>
           </div>
         </div>
       </div>

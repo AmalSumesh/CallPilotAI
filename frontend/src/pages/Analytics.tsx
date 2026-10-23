@@ -167,12 +167,12 @@ export const Analytics: React.FC = () => {
         actions={
           <div className="flex flex-wrap items-center gap-2">
             {/* Date filter */}
-            <div className="flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">
-              <Calendar className="w-3.5 h-3.5 text-slate-400" />
+            <div className="flex items-center gap-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-200 shadow-2xs">
+              <Calendar className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
               <select
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value as 'all' | 'today' | '7d' | '30d')}
-                className="bg-transparent focus:outline-hidden cursor-pointer"
+                className="bg-transparent focus:outline-hidden cursor-pointer dark:bg-slate-800"
               >
                 <option value="all">All Dates</option>
                 <option value="today">Today</option>
@@ -183,12 +183,12 @@ export const Analytics: React.FC = () => {
 
             {/* Agent filter (if Admin) */}
             {isAdmin && agents.length > 0 && (
-              <div className="flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">
-                <Filter className="w-3.5 h-3.5 text-slate-400" />
+              <div className="flex items-center gap-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-200 shadow-2xs">
+                <Filter className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                 <select
                   value={agentFilter}
                   onChange={(e) => setAgentFilter(e.target.value)}
-                  className="bg-transparent focus:outline-hidden cursor-pointer"
+                  className="bg-transparent focus:outline-hidden cursor-pointer dark:bg-slate-800"
                 >
                   <option value="all">All Agents</option>
                   {agents.map((ag) => (
@@ -235,19 +235,19 @@ export const Analytics: React.FC = () => {
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Call Volume Trend */}
-        <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-5 shadow-2xs space-y-4">
           <div>
-            <h3 className="text-sm font-bold text-slate-900">Call Volume Cadence</h3>
-            <p className="text-xs text-slate-500">Total conversation recordings by date</p>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Call Volume Cadence</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Total conversation recordings by date</p>
           </div>
           <CallVolumeChart data={volumeData} height={220} />
         </div>
 
         {/* Emotion Distribution */}
-        <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-5 shadow-2xs space-y-4">
           <div>
-            <h3 className="text-sm font-bold text-slate-900">Emotion Distribution</h3>
-            <p className="text-xs text-slate-500">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Emotion Distribution</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Aggregated frequency of predicted emotion classes
             </p>
           </div>
@@ -257,22 +257,22 @@ export const Analytics: React.FC = () => {
 
       {/* Team / Agent Level Comparison (for Admin) */}
       {isAdmin && agentComparison.length > 0 && (
-        <div className="bg-white rounded-xl border border-slate-200/90 shadow-2xs overflow-hidden">
-          <div className="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 shadow-2xs overflow-hidden">
+          <div className="p-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 flex items-center justify-between">
             <div>
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <Users className="w-4 h-4 text-blue-600" />
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <Users className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 Agent Performance & Escalation Comparison
               </h3>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Authorized supervisor breakdown of agent call volumes and frustration escalations
               </p>
             </div>
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-600">
-              <thead className="bg-slate-50 border-b border-slate-200 text-slate-700 font-semibold uppercase tracking-wider text-[11px]">
+            <table className="w-full text-left text-xs text-slate-600 dark:text-slate-300">
+              <thead className="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-semibold uppercase tracking-wider text-[11px]">
                 <tr>
                   <th className="py-3 px-4">Agent Name</th>
                   <th className="py-3 px-4">Total Calls</th>
@@ -281,33 +281,33 @@ export const Analytics: React.FC = () => {
                   <th className="py-3 px-4 text-right">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {agentComparison.map((ag, idx) => {
                   const ratio = ag.total > 0 ? Math.round((ag.escalations / ag.total) * 100) : 0;
                   return (
-                    <tr key={idx} className="hover:bg-slate-50">
-                      <td className="py-3 px-4 font-bold text-slate-900">{ag.name}</td>
-                      <td className="py-3 px-4 font-mono">{ag.total}</td>
-                      <td className="py-3 px-4 font-mono text-rose-700 font-semibold">
+                    <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                      <td className="py-3 px-4 font-bold text-slate-900 dark:text-white">{ag.name}</td>
+                      <td className="py-3 px-4 font-mono text-slate-700 dark:text-slate-300">{ag.total}</td>
+                      <td className="py-3 px-4 font-mono text-rose-600 dark:text-rose-400 font-semibold">
                         {ag.escalations}
                       </td>
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-16 h-2 rounded-full bg-slate-100 overflow-hidden">
+                          <div className="w-16 h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
                             <div
                               className="h-full bg-rose-500 rounded-full"
                               style={{ width: `${Math.min(100, ratio)}%` }}
                             />
                           </div>
-                          <span className="font-mono text-[11px] font-bold">{ratio}%</span>
+                          <span className="font-mono text-[11px] font-bold text-slate-800 dark:text-slate-200">{ratio}%</span>
                         </div>
                       </td>
                       <td className="py-3 px-4 text-right">
                         <span
                           className={`inline-flex px-2 py-0.5 rounded text-[11px] font-medium border ${
                             ratio > 30
-                              ? 'bg-rose-50 text-rose-700 border-rose-200'
-                              : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                              ? 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-900/60'
+                              : 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900/60'
                           }`}
                         >
                           {ratio > 30 ? 'High Escalations' : 'Healthy'}

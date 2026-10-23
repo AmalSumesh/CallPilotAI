@@ -167,7 +167,7 @@ export const CallDetails: React.FC = () => {
       <div>
         <Link
           to={backPath}
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-slate-800 transition"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition"
         >
           <ArrowLeft className="w-3.5 h-3.5" /> Back to Call History
         </Link>
@@ -187,7 +187,7 @@ export const CallDetails: React.FC = () => {
             <button
               type="button"
               onClick={() => setShowDeleteModal(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-rose-600 hover:text-white hover:bg-rose-600 border border-rose-200 hover:border-rose-600 rounded-lg transition shadow-2xs cursor-pointer ml-1"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:text-white dark:hover:text-white hover:bg-rose-600 dark:hover:bg-rose-600 border border-rose-200 dark:border-rose-800 hover:border-rose-600 rounded-lg transition shadow-2xs cursor-pointer ml-1"
               title="Delete Call Record"
             >
               <Trash2 className="w-3.5 h-3.5" />
@@ -199,54 +199,54 @@ export const CallDetails: React.FC = () => {
 
       {/* Metadata Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl border border-slate-200/90 p-4">
-          <div className="flex items-center gap-2 text-slate-500 text-xs font-medium mb-1">
-            <User className="w-4 h-4 text-slate-400" />
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-4">
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium mb-1">
+            <User className="w-4 h-4 text-slate-400 dark:text-slate-500" />
             Agent
           </div>
-          <p className="text-sm font-bold text-slate-900 truncate">{agentName}</p>
-          {agentEmail && <p className="text-[11px] text-slate-400 truncate">{agentEmail}</p>}
+          <p className="text-sm font-bold text-slate-900 dark:text-white truncate">{agentName}</p>
+          {agentEmail && <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate">{agentEmail}</p>}
         </div>
 
-        <div className="bg-white rounded-xl border border-slate-200/90 p-4">
-          <div className="flex items-center gap-2 text-slate-500 text-xs font-medium mb-1">
-            <Clock className="w-4 h-4 text-slate-400" />
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-4">
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium mb-1">
+            <Clock className="w-4 h-4 text-slate-400 dark:text-slate-500" />
             Duration
           </div>
-          <p className="text-sm font-bold text-slate-900 font-mono">
+          <p className="text-sm font-bold text-slate-900 dark:text-white font-mono">
             {formatDuration(call.duration)}
           </p>
-          <p className="text-[11px] text-slate-400">Audio playback duration</p>
+          <p className="text-[11px] text-slate-400 dark:text-slate-500">Audio playback duration</p>
         </div>
 
-        <div className="bg-white rounded-xl border border-slate-200/90 p-4">
-          <div className="flex items-center gap-2 text-slate-500 text-xs font-medium mb-1">
-            <Radio className="w-4 h-4 text-slate-400" />
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-4">
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium mb-1">
+            <Radio className="w-4 h-4 text-slate-400 dark:text-slate-500" />
             Input Source
           </div>
-          <p className="text-sm font-bold text-slate-900 capitalize">{call.source}</p>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-sm font-bold text-slate-900 dark:text-white capitalize">{call.source}</p>
+          <p className="text-[11px] text-slate-400 dark:text-slate-500">
             {call.source === 'upload' ? 'Batch File Upload' : 'Live Stream Session'}
           </p>
         </div>
 
-        <div className="bg-white rounded-xl border border-slate-200/90 p-4">
-          <div className="flex items-center gap-2 text-slate-500 text-xs font-medium mb-1">
-            <Calendar className="w-4 h-4 text-slate-400" />
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-4">
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium mb-1">
+            <Calendar className="w-4 h-4 text-slate-400 dark:text-slate-500" />
             Recorded At
           </div>
-          <p className="text-xs font-bold text-slate-900">{formatDate(call.createdAt)}</p>
-          <p className="text-[11px] text-slate-400">Persisted in MongoDB</p>
+          <p className="text-xs font-bold text-slate-900 dark:text-white">{formatDate(call.createdAt)}</p>
+          <p className="text-[11px] text-slate-400 dark:text-slate-500">Persisted in MongoDB</p>
         </div>
       </div>
 
       {/* Frustration / Escalation Notice if flagged */}
       {call.escalationDetected && (
-        <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-800 flex items-start gap-3">
-          <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+        <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-xs text-rose-800 dark:text-rose-300 flex items-start gap-3">
+          <AlertTriangle className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
           <div>
-            <h4 className="font-bold text-rose-900">Frustration-Related Escalation Detected</h4>
-            <p className="mt-1 text-rose-700 leading-relaxed">
+            <h4 className="font-bold text-rose-900 dark:text-rose-200">Frustration-Related Escalation Detected</h4>
+            <p className="mt-1 text-rose-700 dark:text-rose-300 leading-relaxed">
               Elevated combined anger and disgust signals were detected across speech segments during
               this session. Supervisor review recommended.
             </p>
@@ -255,18 +255,18 @@ export const CallDetails: React.FC = () => {
       )}
 
       {/* Emotion Timeline Chart Card */}
-      <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-5 shadow-2xs space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <Activity className="w-4 h-4 text-blue-600" />
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Activity className="w-4 h-4 text-blue-600 dark:text-blue-400" />
               Speech Emotion Timeline
             </h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               WavLM 6-class neural prediction probabilities plotted over time
             </p>
           </div>
-          <span className="text-xs text-slate-400 font-mono">
+          <span className="text-xs text-slate-400 dark:text-slate-500 font-mono">
             {call.emotionTrend?.length || 0} sample windows
           </span>
         </div>
@@ -275,15 +275,15 @@ export const CallDetails: React.FC = () => {
       </div>
 
       {/* Audio Playback Card */}
-      <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-5 shadow-2xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
               <Headphones className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Call Audio Recording</h3>
-              <p className="text-xs text-slate-500">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">Call Audio Recording</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 {call.audioUrl
                   ? 'Acoustic waveform and synchronized speech playback'
                   : 'Speech emotion recognition derived via WavLM neural inference'}
@@ -293,7 +293,7 @@ export const CallDetails: React.FC = () => {
 
           {call.audioUrl && (
             <div className="flex items-center gap-2">
-              <span className="font-mono text-xs font-semibold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md">
+              <span className="font-mono text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md">
                 Duration: {formatTime(call.duration)}
               </span>
             </div>
@@ -301,7 +301,7 @@ export const CallDetails: React.FC = () => {
         </div>
 
         {call.audioUrl ? (
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700">
             <audio
               controls
               src={playableUrl}
@@ -310,11 +310,11 @@ export const CallDetails: React.FC = () => {
             />
           </div>
         ) : (
-          <div className="p-4 rounded-xl bg-slate-50 border border-dashed border-slate-200 flex items-center gap-3 text-xs text-slate-500">
-            <VolumeX className="w-5 h-5 text-slate-400 shrink-0" />
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-dashed border-slate-200 dark:border-slate-700 flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
+            <VolumeX className="w-5 h-5 text-slate-400 dark:text-slate-500 shrink-0" />
             <div className="space-y-0.5">
-              <p className="font-semibold text-slate-700">Audio recording not attached to this legacy record</p>
-              <p className="text-[11px] text-slate-400">
+              <p className="font-semibold text-slate-700 dark:text-slate-300">Audio recording not attached to this legacy record</p>
+              <p className="text-[11px] text-slate-400 dark:text-slate-500">
                 This record contains WavLM emotion predictions ({call.duration}s duration). All new uploaded audio files and live microphone recordings include full synchronized playback here.
               </p>
             </div>
@@ -323,11 +323,11 @@ export const CallDetails: React.FC = () => {
 
         {/* Transcript Section if text exists */}
         {call.transcript && (
-          <div className="pt-3 border-t border-slate-100 space-y-1.5">
-            <h4 className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-              <FileText className="w-3.5 h-3.5 text-slate-500" /> Transcript
+          <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-1.5">
+            <h4 className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" /> Transcript
             </h4>
-            <p className="text-xs text-slate-600 font-mono bg-slate-50 p-3 rounded-lg leading-relaxed whitespace-pre-wrap">
+            <p className="text-xs text-slate-600 dark:text-slate-300 font-mono bg-slate-50 dark:bg-slate-800/60 p-3 rounded-lg leading-relaxed whitespace-pre-wrap">
               {call.transcript}
             </p>
           </div>
@@ -336,23 +336,23 @@ export const CallDetails: React.FC = () => {
 
       {/* Timestamped Emotion Segments Data Table */}
       {call.emotionTrend && call.emotionTrend.length > 0 && (
-        <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-2xs space-y-3">
-          <h3 className="text-sm font-bold text-slate-900">Segmented Window Breakdown</h3>
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-5 shadow-2xs space-y-3">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-white">Segmented Window Breakdown</h3>
           <div className="overflow-x-auto max-h-72 overflow-y-auto">
             <table className="w-full text-left text-xs font-mono">
-              <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 sticky top-0">
+              <thead className="bg-slate-50 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 sticky top-0">
                 <tr>
                   <th className="py-2.5 px-3">Time</th>
-                  <th className="py-2.5 px-3 text-rose-600">Anger</th>
-                  <th className="py-2.5 px-3 text-amber-600">Disgust</th>
-                  <th className="py-2.5 px-3 text-purple-600">Fear</th>
-                  <th className="py-2.5 px-3 text-emerald-600">Happy</th>
-                  <th className="py-2.5 px-3 text-slate-600">Neutral</th>
-                  <th className="py-2.5 px-3 text-blue-600">Sad</th>
+                  <th className="py-2.5 px-3 text-rose-600 dark:text-rose-400">Anger</th>
+                  <th className="py-2.5 px-3 text-amber-600 dark:text-amber-400">Disgust</th>
+                  <th className="py-2.5 px-3 text-purple-600 dark:text-purple-400">Fear</th>
+                  <th className="py-2.5 px-3 text-emerald-600 dark:text-emerald-400">Happy</th>
+                  <th className="py-2.5 px-3 text-slate-600 dark:text-slate-400">Neutral</th>
+                  <th className="py-2.5 px-3 text-blue-600 dark:text-blue-400">Sad</th>
                   <th className="py-2.5 px-3 text-right">Dominant</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {call.emotionTrend.map((pt, idx) => {
                   const emotions: EmotionName[] = [
                     'anger',
@@ -373,22 +373,22 @@ export const CallDetails: React.FC = () => {
                   });
 
                   return (
-                    <tr key={idx} className="hover:bg-slate-50">
-                      <td className="py-2 px-3 font-semibold text-slate-800">{pt.time.toFixed(1)}s</td>
-                      <td className="py-2 px-3 text-rose-700">{Math.round((pt.anger || 0) * 100)}%</td>
-                      <td className="py-2 px-3 text-amber-700">
+                    <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                      <td className="py-2 px-3 font-semibold text-slate-800 dark:text-slate-200">{pt.time.toFixed(1)}s</td>
+                      <td className="py-2 px-3 text-rose-700 dark:text-rose-400">{Math.round((pt.anger || 0) * 100)}%</td>
+                      <td className="py-2 px-3 text-amber-700 dark:text-amber-400">
                         {Math.round((pt.disgust || 0) * 100)}%
                       </td>
-                      <td className="py-2 px-3 text-purple-700">{Math.round((pt.fear || 0) * 100)}%</td>
-                      <td className="py-2 px-3 text-emerald-700">
+                      <td className="py-2 px-3 text-purple-700 dark:text-purple-400">{Math.round((pt.fear || 0) * 100)}%</td>
+                      <td className="py-2 px-3 text-emerald-700 dark:text-emerald-400">
                         {Math.round((pt.happy || 0) * 100)}%
                       </td>
-                      <td className="py-2 px-3 text-slate-700">
+                      <td className="py-2 px-3 text-slate-700 dark:text-slate-300">
                         {Math.round((pt.neutral || 0) * 100)}%
                       </td>
-                      <td className="py-2 px-3 text-blue-700">{Math.round((pt.sad || 0) * 100)}%</td>
+                      <td className="py-2 px-3 text-blue-700 dark:text-blue-400">{Math.round((pt.sad || 0) * 100)}%</td>
                       <td className="py-2 px-3 text-right">
-                        <span className="capitalize font-bold text-slate-900">{maxEmotion}</span>
+                        <span className="capitalize font-bold text-slate-900 dark:text-white">{maxEmotion}</span>
                       </td>
                     </tr>
                   );

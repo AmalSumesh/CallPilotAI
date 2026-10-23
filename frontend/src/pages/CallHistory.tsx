@@ -73,7 +73,7 @@ export const CallHistory: React.FC = () => {
               type="button"
               onClick={fetchCalls}
               disabled={isLoading}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-2xs cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
               Refresh
@@ -94,12 +94,12 @@ export const CallHistory: React.FC = () => {
       {error && <ErrorAlert message={error} onRetry={fetchCalls} />}
 
       {deleteSuccess && (
-        <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center justify-between">
+        <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900/60 text-xs text-emerald-800 dark:text-emerald-300 flex items-center justify-between">
           <span>{deleteSuccess}</span>
           <button
             type="button"
             onClick={() => setDeleteSuccess(null)}
-            className="text-emerald-700 font-semibold hover:underline"
+            className="text-emerald-700 dark:text-emerald-400 font-semibold hover:underline cursor-pointer"
           >
             Dismiss
           </button>
@@ -107,16 +107,16 @@ export const CallHistory: React.FC = () => {
       )}
 
       {/* Summary Banner */}
-      <div className="bg-white rounded-xl border border-slate-200/90 p-4 flex flex-wrap items-center justify-between gap-4 text-xs">
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-4 flex flex-wrap items-center justify-between gap-4 text-xs">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-blue-50 text-blue-600">
+          <div className="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
             <PhoneCall className="w-4 h-4" />
           </div>
           <div>
-            <p className="font-semibold text-slate-900">
-              Total Records: <span className="font-bold text-blue-600">{calls.length}</span>
+            <p className="font-semibold text-slate-900 dark:text-white">
+              Total Records: <span className="font-bold text-blue-600 dark:text-blue-400">{calls.length}</span>
             </p>
-            <p className="text-slate-500 text-[11px]">
+            <p className="text-slate-500 dark:text-slate-400 text-[11px]">
               {isAdmin
                 ? 'Authorized to inspect and manage all agent calls across the organization'
                 : 'Showing calls assigned specifically to your agent profile'}

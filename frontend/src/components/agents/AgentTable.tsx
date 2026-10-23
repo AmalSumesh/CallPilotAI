@@ -46,21 +46,21 @@ export const AgentTable: React.FC<AgentTableProps> = ({
 
   return (
     <>
-      <div className="bg-white rounded-xl border border-slate-200/90 shadow-2xs overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 shadow-2xs overflow-hidden">
         {/* Search */}
-        <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+        <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/40">
           <div className="relative w-full max-w-sm">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search agents by name or email..."
-              className="w-full pl-9 pr-4 py-2 text-xs bg-white border border-slate-200 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+              className="w-full pl-9 pr-4 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
             />
           </div>
-          <span className="text-xs text-slate-500">
-            Total Agents: <span className="font-semibold text-slate-800">{agents.length}</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400">
+            Total Agents: <span className="font-semibold text-slate-800 dark:text-slate-200">{agents.length}</span>
           </span>
         </div>
 
@@ -79,8 +79,8 @@ export const AgentTable: React.FC<AgentTableProps> = ({
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-600">
-              <thead className="bg-slate-50/75 border-b border-slate-200 text-slate-700 font-semibold uppercase tracking-wider text-[11px]">
+            <table className="w-full text-left text-xs text-slate-600 dark:text-slate-300">
+              <thead className="bg-slate-50/75 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-semibold uppercase tracking-wider text-[11px]">
                 <tr>
                   <th className="py-3.5 px-4">Agent Name</th>
                   <th className="py-3.5 px-4">Email Address</th>
@@ -90,22 +90,22 @@ export const AgentTable: React.FC<AgentTableProps> = ({
                   <th className="py-3.5 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {filteredAgents.map((agent) => (
-                  <tr key={agent._id} className="hover:bg-slate-50/80 transition">
+                  <tr key={agent._id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">
+                        <div className="w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 flex items-center justify-center font-bold text-xs border border-blue-200 dark:border-blue-800">
                           {agent.name.charAt(0).toUpperCase()}
                         </div>
-                        <span className="font-semibold text-slate-900">{agent.name}</span>
+                        <span className="font-semibold text-slate-900 dark:text-white">{agent.name}</span>
                       </div>
                     </td>
 
-                    <td className="py-3.5 px-4 font-mono text-slate-700">{agent.email}</td>
+                    <td className="py-3.5 px-4 font-mono text-slate-700 dark:text-slate-300">{agent.email}</td>
 
                     <td className="py-3.5 px-4">
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-700">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                         agent
                       </span>
                     </td>
@@ -117,9 +117,9 @@ export const AgentTable: React.FC<AgentTableProps> = ({
                       />
                     </td>
 
-                    <td className="py-3.5 px-4 text-slate-400">
+                    <td className="py-3.5 px-4 text-slate-400 dark:text-slate-500">
                       <span className="flex items-center gap-1.5">
-                        <Calendar className="w-3 h-3 text-slate-300" />
+                        <Calendar className="w-3 h-3 text-slate-300 dark:text-slate-600" />
                         {formatDate(agent.createdAt)}
                       </span>
                     </td>
@@ -130,8 +130,8 @@ export const AgentTable: React.FC<AgentTableProps> = ({
                         onClick={() => setSelectedAgent(agent)}
                         className={`inline-flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium transition border ${
                           agent.isActive
-                            ? 'text-rose-700 bg-rose-50 border-rose-200 hover:bg-rose-100'
-                            : 'text-emerald-700 bg-emerald-50 border-emerald-200 hover:bg-emerald-100'
+                            ? 'text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/50 border-rose-200 dark:border-rose-900/60 hover:bg-rose-100 dark:hover:bg-rose-900/40'
+                            : 'text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-900/60 hover:bg-emerald-100 dark:hover:bg-emerald-900/40'
                         }`}
                       >
                         {agent.isActive ? (

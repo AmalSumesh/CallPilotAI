@@ -115,14 +115,14 @@ export const AgentDashboard: React.FC = () => {
           <div className="flex items-center gap-2">
             <Link
               to="/agent/live"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 shadow-2xs transition"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 shadow-2xs transition"
             >
-              <Mic className="w-3.5 h-3.5 text-blue-600" />
+              <Mic className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
               Live Stream
             </Link>
             <Link
               to="/agent/analyze"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-2xs transition"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-2xs transition"
             >
               <Headphones className="w-3.5 h-3.5" />
               Analyze Call
@@ -170,18 +170,18 @@ export const AgentDashboard: React.FC = () => {
 
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-5 shadow-2xs space-y-4">
           <div>
-            <h3 className="text-sm font-bold text-slate-900">My Handled Calls Timeline</h3>
-            <p className="text-xs text-slate-500">Recordings assigned to your agent profile</p>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">My Handled Calls Timeline</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Recordings assigned to your agent profile</p>
           </div>
           <CallVolumeChart data={volumeData} height={190} />
         </div>
 
-        <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-2xs space-y-4">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-slate-800 p-5 shadow-2xs space-y-4">
           <div>
-            <h3 className="text-sm font-bold text-slate-900">My Emotion Distribution</h3>
-            <p className="text-xs text-slate-500">Customer emotion signals on your calls</p>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">My Emotion Distribution</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Customer emotion signals on your calls</p>
           </div>
           <EmotionDistributionChart distribution={emotionDistribution} />
         </div>
@@ -191,14 +191,14 @@ export const AgentDashboard: React.FC = () => {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-base font-bold text-slate-900">Recent Assigned Calls</h2>
-            <p className="text-xs text-slate-500">
+            <h2 className="text-base font-bold text-slate-900 dark:text-white">Recent Assigned Calls</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Only your authorized calls are retrieved from the backend
             </p>
           </div>
           <Link
             to="/agent/calls"
-            className="text-xs font-semibold text-blue-600 hover:text-blue-800"
+            className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
           >
             All My Calls →
           </Link>

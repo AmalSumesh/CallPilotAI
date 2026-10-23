@@ -33,9 +33,9 @@ export const EmotionDistributionChart: React.FC<EmotionDistributionChartProps> =
   return (
     <div className="space-y-4">
       {/* Horizontal Multi-color Stacked Bar */}
-      <div className="h-3 w-full rounded-full bg-slate-100 overflow-hidden flex relative shadow-inner">
+      <div className="h-3 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex relative shadow-inner">
         {total === 0 ? (
-          <div className="w-full h-full flex items-center justify-center text-[10px] text-slate-400 font-medium">
+          <div className="w-full h-full flex items-center justify-center text-[10px] text-slate-400 dark:text-slate-500 font-medium">
             No speech data recorded yet
           </div>
         ) : (
@@ -61,21 +61,21 @@ export const EmotionDistributionChart: React.FC<EmotionDistributionChartProps> =
         {sortedEmotions.map((item) => (
           <div
             key={item.key}
-            className="p-2.5 rounded-xl border border-slate-200/80 bg-slate-50/70 hover:bg-white hover:border-slate-300 hover:shadow-xs transition duration-150"
+            className="p-2.5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/60 hover:bg-white dark:hover:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-xs transition duration-150"
           >
             <div className="flex items-center justify-between gap-1.5 mb-1.5">
-              <span className="flex items-center gap-1.5 min-w-0 font-medium text-xs text-slate-700">
+              <span className="flex items-center gap-1.5 min-w-0 font-medium text-xs text-slate-700 dark:text-slate-200">
                 <span
                   className="w-2.5 h-2.5 rounded-full shrink-0 shadow-2xs"
                   style={{ backgroundColor: item.color }}
                 />
                 <span className="truncate">{item.label}</span>
               </span>
-              <span className="font-mono text-xs font-bold text-slate-900 shrink-0">
+              <span className="font-mono text-xs font-bold text-slate-900 dark:text-white shrink-0">
                 {item.percentage}%
               </span>
             </div>
-            <div className="w-full h-1.5 rounded-full bg-slate-200/80 overflow-hidden">
+            <div className="w-full h-1.5 rounded-full bg-slate-200/80 dark:bg-slate-800 overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-500 ease-out"
                 style={{
