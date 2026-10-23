@@ -11,6 +11,7 @@ import {
   CheckCircle2,
   Save,
   ExternalLink,
+  Loader2,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ML_WS_URL } from '../api/client';
@@ -489,15 +490,42 @@ export const LiveMonitoring: React.FC = () => {
           )}
         </div>
 
-        {livePoints.length === 0 ? (
-          <div className="flex flex-col items-center justify-center p-12 text-center bg-slate-50 dark:bg-slate-800/40 rounded-lg border border-dashed border-slate-200 dark:border-slate-700">
-            <Mic className="w-8 h-8 text-slate-300 dark:text-slate-600 mb-2" />
-            <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">No active live audio stream</p>
-            <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1 max-w-sm">
-              Click &quot;Start Microphone Demonstration&quot; above to capture browser audio and
-              receive live WavLM emotion classifications.
-            </p>
+        {/* Azure Cold Start Warning Banner */}
+        {isStreaming && (!serverReady || livePoints.length === 0) && (
+          <div className="p-3.5 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 flex items-start gap-3 text-xs text-amber-900 dark:text-amber-200 animate-pulse">
+            <Loader2 className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 animate-spin mt-0.5" />
+            <div className="space-y-0.5">
+              <p className="font-semibold text-amber-950 dark:text-amber-200">
+                Connecting & Warming up Azure Neural Engine...
+              </p>
+              <p className="text-[11px] text-amber-800 dark:text-amber-300 leading-relaxed">
+                Because CallPilot AI is hosted on a cost-efficient scale-to-zero cloud container, the WavLM deep learning model takes ~5–10 seconds to wake up and load into memory on the initial connection. Your microphone is already buffering—live emotion graphs will appear automatically in a moment.
+              </p>
+            </div>
           </div>
+        )}
+
+        {livePoints.length === 0 ? (
+          isStreaming ? (
+            <div className="flex flex-col items-center justify-center p-12 text-center bg-amber-50/40 dark:bg-amber-950/20 rounded-lg border border-dashed border-amber-300 dark:border-amber-800">
+              <Loader2 className="w-8 h-8 text-amber-600 dark:text-amber-400 animate-spin mb-3" />
+              <p className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                Initializing WavLM Speech Transformer...
+              </p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 max-w-md">
+                Connecting to Azure WebSocket (<code className="text-amber-700 dark:text-amber-300 font-mono">/ws/live</code>) and loading acoustic attention weights into memory. Please speak normally into your microphone.
+              </p>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center p-12 text-center bg-slate-50 dark:bg-slate-800/40 rounded-lg border border-dashed border-slate-200 dark:border-slate-700">
+              <Mic className="w-8 h-8 text-slate-300 dark:text-slate-600 mb-2" />
+              <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">No active live audio stream</p>
+              <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1 max-w-sm">
+                Click &quot;Start Microphone Demonstration&quot; above to capture browser audio and
+                receive live WavLM emotion classifications.
+              </p>
+            </div>
+          )
         ) : (
           <EmotionTrendChart data={livePoints} height={280} showFrustrationSignal={true} />
         )}
